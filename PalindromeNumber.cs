@@ -14,7 +14,6 @@ public class Solution
         int revInt;
         if (Int32.TryParse(reverse, out revInt))
         {
-            ;
             if (x != revInt)
             {
                 return false;

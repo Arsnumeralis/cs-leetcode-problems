@@ -5,22 +5,26 @@ public class Solution
 {
     public string LongestCommonPrefix(string[] strs)
     {
-        List<string> prefixes = new List<string>();
-        int shortestLength = strs.Min(w => w.Length);
-        string shortestWord = strs.FirstOrDefault(w => w.Length == shortestLength);
-        bool check = true;
-        int i = 0;
-        string prefix = string.Empty;
-        while (check == true && i < shortestLength)
+        string CompareMethod(string prefix, string word)
         {
-            if (strs.All(el => el[i] == shortestWord[i]))
+            string common = "";
+            for (int i = 0; i < Math.Min(prefix.Length, word.Length) && prefix[i] == word[i]; i++)
             {
-                prefix += shortestWord[i];
-                i++;
+                common += prefix[i];
             }
-            else
+            return common;
+        }
+        string prefix = "";
+        for (int i = 0; i < strs.Length; i++)
+        {
+            if (i == 0)
             {
-                check = false;
+                prefix += strs[i];
+            }
+            prefix = CompareMethod(prefix, strs[i]);
+            if (prefix == "")
+            {
+                return prefix;
             }
         }
         return prefix;
